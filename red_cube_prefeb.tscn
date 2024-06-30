@@ -1,35 +1,51 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1msa006ub34h"]
+[gd_scene load_steps=8 format=3 uid="uid://b1msa006ub34h"]
 
 [ext_resource type="Script" path="res://boxes.gd" id="1_fv4li"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_m228u"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ceqfa"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ew7tx"]
-albedo_color = Color(1, 0, 0, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gdyv8"]
+albedo_color = Color(0.741367, 0, 0.154784, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_vd1e1"]
-lightmap_size_hint = Vector2i(14, 21)
-material = SubResource("StandardMaterial3D_ew7tx")
+[sub_resource type="BoxMesh" id="BoxMesh_tud5d"]
+material = SubResource("StandardMaterial3D_gdyv8")
 
-[sub_resource type="PrismMesh" id="PrismMesh_pl50c"]
+[sub_resource type="PrismMesh" id="PrismMesh_djbn1"]
 
-[node name="Area3D" type="Area3D" groups=["Blue"]]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8po00"]
+albedo_color = Color(0.602198, 0, 0.19105, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dkehy"]
+material = SubResource("StandardMaterial3D_8po00")
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="Area3D" type="Area3D" groups=["Red"]]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
 script = ExtResource("1_fv4li")
 box_type = "red"
 opposite_box_type = "blue"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_m228u")
-metadata/_edit_group_ = true
+shape = SubResource("BoxShape3D_ceqfa")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_vd1e1")
-metadata/_edit_group_ = true
+mesh = SubResource("BoxMesh_tud5d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0.075)
-mesh = SubResource("PrismMesh_pl50c")
+mesh = SubResource("PrismMesh_djbn1")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(0.999979, -0.00649258, 0, 0.00649258, 0.999979, 0, 0, 0, 1, 0, 0, 0)
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("BoxMesh_dkehy")
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 0.5, 0.5)
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 4.0
+damping_max = 9.091
+color = Color(0.691379, 0, 0.183269, 1)
