@@ -8,6 +8,7 @@ func _ready():
 	mistake_count = 0
 	text = str(score)
 	GameManager.box_freed.connect(self.on_box_freed)
+	GameManager.wrong_box_freed.connect(self.on_mistake)
 	
 	pass # Replace with function body.
 
@@ -18,8 +19,11 @@ func _process(delta):
 
 func on_box_freed():
 	score += 1
+	modulate = Color(0, 255, 0)
 	text = str(score)
 
 func on_mistake():
 	score -= 1
+	mistake_count += 1
+	modulate = Color(255,0,0)
 	text = str(score)

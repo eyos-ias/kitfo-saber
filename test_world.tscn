@@ -135,6 +135,7 @@ fov = 110.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
 script = SubResource("GDScript_figda")
+metadata/_edit_group_ = true
 
 [node name="Blade" type="Node3D" parent="XROrigin3D/LeftController"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.35, -0.2)
@@ -149,29 +150,36 @@ skeleton = NodePath("../..")
 shape = SubResource("CapsuleShape3D_70org")
 
 [node name="FunctionPointer" parent="XROrigin3D/LeftController" instance=ExtResource("6_gcfve")]
+visible = false
 show_laser = 2
 laser_length = 1
 show_target = true
 distance = 5.0
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.068, 1.15, -22.389)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.392226, 1.23508, -0.661748)
 tracker = &"right_hand"
 script = SubResource("GDScript_0xvta")
+metadata/_edit_group_ = true
 
 [node name="Blade2" type="Node3D" parent="XROrigin3D/RightController"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.35, -0.2)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController/Blade2" groups=["blue"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_ihe0a")
 skeleton = NodePath("../../../LeftController")
 
 [node name="Area3D" type="Area3D" parent="XROrigin3D/RightController/Blade2" groups=["blue"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/RightController/Blade2/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_70org")
 
 [node name="FunctionPointer" parent="XROrigin3D/RightController" instance=ExtResource("6_gcfve")]
+visible = false
 show_laser = 2
 laser_length = 1
 show_target = true
@@ -197,7 +205,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -49)
 mesh = SubResource("PlaneMesh_2twi3")
 
 [node name="InstancePoint" type="Node3D" parent="LevelFloor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06814, 1.15043, -22.3888)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.135799, 0.777895, -50.5865)
 script = ExtResource("3_hq4gl")
 
 [node name="Timer" type="Timer" parent="LevelFloor/InstancePoint"]
@@ -218,9 +226,10 @@ script = SubResource("GDScript_3p68l")
 script = SubResource("GDScript_hitxt")
 
 [node name="ScoreLabel" type="Label3D" parent="InGameUI"]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -3, 1.5, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.246642, 2.89795, -3)
 text = "Score:
-1000"
+0
+"
 font_size = 48
 outline_size = 4
 script = ExtResource("6_26430")
@@ -232,6 +241,7 @@ outline_size = 4
 
 [node name="SongLabel" type="Label3D" parent="InGameUI"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 2.08165e-12, 3, -3)
+visible = false
 text = "SONG NAME"
 outline_size = 4
 

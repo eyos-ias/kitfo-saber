@@ -30,6 +30,7 @@ signal box_freed
 signal wrong_box_freed
 
 func _ready():
+	#randomize()
 	interface = XRServer.find_interface("OpenXR")
 	if interface and interface.is_initialized():
 		print("OpenXR initialised successfully")
