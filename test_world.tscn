@@ -166,12 +166,10 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.35, -0.2)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController/Blade2" groups=["blue"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_ihe0a")
 skeleton = NodePath("../../../LeftController")
 
 [node name="Area3D" type="Area3D" parent="XROrigin3D/RightController/Blade2" groups=["blue"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/RightController/Blade2/Area3D"]
