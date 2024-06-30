@@ -1,9 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://fiqkyxgpcx43"]
+[gd_scene load_steps=14 format=3 uid="uid://fiqkyxgpcx43"]
 
 [ext_resource type="Script" path="res://boxes.gd" id="1_iyufa"]
 [ext_resource type="PackedScene" uid="uid://1spsf6iq1avs" path="res://gomen.glb" id="2_pxjku"]
 [ext_resource type="AudioStream" uid="uid://cmq74mbe1jq4d" path="res://sfx/sword.7.ogg" id="3_a6shc"]
 [ext_resource type="Script" path="res://queue_free_timer.gd" id="4_4pefw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kle82"]
+albedo_color = Color(0, 0.52549, 0, 1)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+emission_energy_multiplier = 12.79
+
+[sub_resource type="TorusMesh" id="TorusMesh_0h6w0"]
+material = SubResource("StandardMaterial3D_kle82")
+inner_radius = 0.32
+outer_radius = 0.474
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m228u"]
 
@@ -35,6 +46,10 @@ size = Vector3(0.1, 0.1, 0.1)
 [node name="Area3D2" type="Area3D" groups=["Blue"]]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
 script = ExtResource("1_iyufa")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.402419, 0)
+mesh = SubResource("TorusMesh_0h6w0")
 
 [node name="kitfo" parent="." instance=ExtResource("2_pxjku")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)

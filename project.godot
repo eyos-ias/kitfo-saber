@@ -41,6 +41,10 @@ enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
 
 theme/custom="res://UI/ui_theme.tres"
 
+[physics]
+
+common/physics_ticks_per_second=90
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

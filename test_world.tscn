@@ -196,7 +196,7 @@ distance = 5.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_yylm4")
-volume_db = -25.297
+volume_db = 6.17
 autoplay = true
 script = ExtResource("4_jse6n")
 
@@ -261,4 +261,5 @@ outline_size = 4
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84.8792, -290.244, -80.83)
 
+[connection signal="finished" from="AudioStreamPlayer" to="InGameUI/ScoreLabel" method="_on_audio_stream_player_finished"]
 [connection signal="timeout" from="InstancePoint/Timer" to="InstancePoint" method="_on_timer_timeout"]

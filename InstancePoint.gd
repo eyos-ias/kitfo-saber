@@ -23,7 +23,7 @@ func _on_timer_timeout():
 	add_child(instance)
 	
 	# Set random position and scale
-	instance.global_position = global_position + Vector3(randf_range(-25, 2.5), 0, 0)
+	instance.global_position = global_position + Vector3(randf_range(-2.5, 2.5), 0, 0)
 	instance.scale = Vector3(0.4, 0.4, 0.4)
 
 func randf_range(min: float, max: float) -> float:

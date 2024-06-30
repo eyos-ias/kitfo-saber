@@ -25,5 +25,11 @@ func on_box_freed():
 func on_mistake():
 	score -= 1
 	chances_left -= 1
+	if chances_left <= 0:
+		get_tree().change_scene_to_file("res://gameover.tscn")
 	modulate = Color(255,0,0)
 	text = "Score: " + str(score) + "\n" + "chances left: " + str(chances_left)
+
+
+func _on_audio_stream_player_finished():
+	get_tree().change_scene_to_file("res://gameover.tscn")

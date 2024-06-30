@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://heocs628ea8p"]
+
+[ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_m7omf"]
+[ext_resource type="Script" path="res://gameover.gd" id="1_yrhaw"]
+[ext_resource type="AudioStream" uid="uid://cfaej2j7qbxv8" path="res://ose_basa.mp3" id="2_l77sc"]
+[ext_resource type="Script" path="res://Scripts/AudioStreamPlayer.gd" id="3_wmg44"]
+
+[sub_resource type="GDScript" id="GDScript_hitxt"]
+script/source = "extends Node3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	get_node(\"/root/GameManager\").song_label_changed.connect(on_song_label_changed)
+	get_node(\"/root/GameManager\").time_label_changed.connect(on_time_label_changed)
+
+func on_song_label_changed(new_text):
+	$SongLabel.text = new_text
+
+func on_time_label_changed(new_text):
+	$TimeLabel.text = new_text
+"
+
+[node name="gameover" type="Node3D"]
+script = ExtResource("1_yrhaw")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 1.21393)
+current = true
+fov = 135.4
+
+[node name="VRCommonShaderCache" parent="XROrigin3D/XRCamera3D" instance=ExtResource("1_m7omf")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_l77sc")
+volume_db = -25.297
+autoplay = true
+script = ExtResource("3_wmg44")
+
+[node name="InGameUI" type="Node3D" parent="."]
+script = SubResource("GDScript_hitxt")
+
+[node name="ScoreLabel2" type="Label3D" parent="InGameUI"]
+transform = Transform3D(1, 0, 0, 0, 0.930743, -0.365673, 0, 0.365673, 0.930743, 0, 1.84472, -3.66895)
+pixel_size = 0.0075
+text = "GAME OVER
+"
+font_size = 48
+outline_size = 4
+
+[node name="ScoreLabel3" type="Label3D" parent="InGameUI"]
+transform = Transform3D(1, 0, 0, 0, 0.930743, -0.365673, 0, 0.365673, 0.930743, 0, 0.886091, -3.66895)
+pixel_size = 0.0075
+text = "Retrying in 3 seconds
+
+"
+font_size = 48
+outline_size = 4
+
+[node name="TimeLabel" type="Label3D" parent="InGameUI"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, -0.1, -3)
+visible = false
+text = "0:00/0:00"
+outline_size = 4
+
+[node name="SongLabel" type="Label3D" parent="InGameUI"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 2.08165e-12, 3, -3)
+visible = false
+text = "SONG NAME"
+outline_size = 4
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
