@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*res://GameManager.gd"
+XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
 
 [display]
 
@@ -31,6 +32,10 @@ window/size/viewport_height=720
 movie_writer/mjpeg_quality=0.9
 movie_writer/movie_file="/Users/daniel/godot_recording.avi"
 movie_writer/fps=30
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
 
 [gui]
 
