@@ -21,6 +21,7 @@ func _on_area_entered(area):
 	if area.is_in_group(box_type):
 		print("smashed")
 		GameManager.box_freed.emit()
+		$CPUParticles3D.emitting = true
 		queue_free()
 	if area.is_in_group(opposite_box_type):
 		print("wrong box brev")

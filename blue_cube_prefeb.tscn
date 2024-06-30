@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://fiqkyxgpcx43"]
+[gd_scene load_steps=8 format=3 uid="uid://fiqkyxgpcx43"]
 
 [ext_resource type="Script" path="res://boxes.gd" id="1_iyufa"]
 
@@ -12,6 +12,13 @@ lightmap_size_hint = Vector2i(14, 21)
 material = SubResource("StandardMaterial3D_wy3mb")
 
 [sub_resource type="PrismMesh" id="PrismMesh_pl50c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70g7t"]
+albedo_color = Color(0.12487, 0.0546814, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ie8m0"]
+material = SubResource("StandardMaterial3D_70g7t")
+size = Vector3(0.2, 0.2, 0.2)
 
 [node name="Area3D" type="Area3D" groups=["Blue"]]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
@@ -28,6 +35,20 @@ metadata/_edit_group_ = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0.075)
 mesh = SubResource("PrismMesh_pl50c")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("BoxMesh_ie8m0")
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 0.5, 0.5)
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 4.0
+damping_max = 9.091
+color = Color(0.157671, 0.236911, 1, 1)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
