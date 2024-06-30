@@ -1,6 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://cam248xrc4fbd"]
+[gd_scene load_steps=27 format=3 uid="uid://cam248xrc4fbd"]
 
+[ext_resource type="PackedScene" uid="uid://c5hni5segqrm8" path="res://OldKnife.glb" id="2_lr5v5"]
 [ext_resource type="Script" path="res://InstancePoint.gd" id="3_hq4gl"]
+[ext_resource type="AudioStream" uid="uid://cfaej2j7qbxv8" path="res://ose_basa.mp3" id="3_yylm4"]
+[ext_resource type="Script" path="res://Scripts/AudioStreamPlayer.gd" id="4_jse6n"]
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="6_6yhp5"]
 [ext_resource type="Script" path="res://ScoreLabel.gd" id="6_26430"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="6_gcfve"]
@@ -125,7 +128,7 @@ func on_time_label_changed(new_text):
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 1.21393)
 current = true
 fov = 110.0
 
@@ -140,7 +143,11 @@ metadata/_edit_group_ = true
 [node name="Blade" type="Node3D" parent="XROrigin3D/LeftController"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.35, -0.2)
 
+[node name="OldKnife" parent="XROrigin3D/LeftController/Blade" instance=ExtResource("2_lr5v5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.560063, -0.0114674)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftController/Blade"]
+transform = Transform3D(1, 0, 0, 0, 0.0395994, -1.49012e-08, 0, 1.86265e-09, 0.445512, 0.00339171, -0.581658, 0.00423852)
 mesh = SubResource("CylinderMesh_a0sq0")
 skeleton = NodePath("../..")
 
@@ -165,7 +172,11 @@ metadata/_edit_group_ = true
 [node name="Blade2" type="Node3D" parent="XROrigin3D/RightController"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.35, -0.2)
 
+[node name="OldKnife" parent="XROrigin3D/RightController/Blade2" instance=ExtResource("2_lr5v5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.556286, -0.0163012)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController/Blade2" groups=["blue"]]
+visible = false
 mesh = SubResource("CylinderMesh_ihe0a")
 skeleton = NodePath("../../../LeftController")
 
@@ -184,7 +195,9 @@ show_target = true
 distance = 5.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_yylm4")
 autoplay = true
+script = ExtResource("4_jse6n")
 
 [node name="Scroller" type="Node3D" parent="."]
 script = SubResource("GDScript_ns7s0")
@@ -199,14 +212,14 @@ transform = Transform3D(0.866025, 0.353553, -0.353553, 0, 0.707107, 0.707107, 0.
 mesh = SubResource("PlaneMesh_6dejj")
 
 [node name="LevelFloor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -49)
+transform = Transform3D(2.45642, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -49)
 mesh = SubResource("PlaneMesh_2twi3")
 
-[node name="InstancePoint" type="Node3D" parent="LevelFloor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.135799, 0.777895, -50.5865)
+[node name="InstancePoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33358, 1.23314, -99.5865)
 script = ExtResource("3_hq4gl")
 
-[node name="Timer" type="Timer" parent="LevelFloor/InstancePoint"]
+[node name="Timer" type="Timer" parent="InstancePoint"]
 autostart = true
 
 [node name="Viewport2Din3D" parent="." instance=ExtResource("8_m73sb")]
@@ -224,7 +237,7 @@ script = SubResource("GDScript_3p68l")
 script = SubResource("GDScript_hitxt")
 
 [node name="ScoreLabel" type="Label3D" parent="InGameUI"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.246642, 2.89795, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.251411, 2.90653, -2.58933)
 text = "Score:
 0
 "
@@ -243,4 +256,4 @@ visible = false
 text = "SONG NAME"
 outline_size = 4
 
-[connection signal="timeout" from="LevelFloor/InstancePoint/Timer" to="LevelFloor/InstancePoint" method="_on_timer_timeout"]
+[connection signal="timeout" from="InstancePoint/Timer" to="InstancePoint" method="_on_timer_timeout"]

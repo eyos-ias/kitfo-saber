@@ -20,7 +20,7 @@ albedo_color = Color(0.12487, 0.0546814, 1, 1)
 material = SubResource("StandardMaterial3D_70g7t")
 size = Vector3(0.2, 0.2, 0.2)
 
-[node name="Area3D" type="Area3D" groups=["Blue"]]
+[node name="Area3D2" type="Area3D" groups=["Blue"]]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
 script = ExtResource("1_iyufa")
 
