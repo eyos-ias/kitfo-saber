@@ -1,15 +1,14 @@
-<<<<<<< HEAD
-[gd_scene load_steps=6 format=3 uid="uid://fiqkyxgpcx43"]
-=======
-[gd_scene load_steps=8 format=3 uid="uid://fiqkyxgpcx43"]
->>>>>>> f66723f1e93a2b7c0e2addff62bddfc06d897cf8
+[gd_scene load_steps=12 format=3 uid="uid://fiqkyxgpcx43"]
 
 [ext_resource type="Script" path="res://boxes.gd" id="1_iyufa"]
+[ext_resource type="PackedScene" uid="uid://1spsf6iq1avs" path="res://gomen.glb" id="2_pxjku"]
+[ext_resource type="AudioStream" uid="uid://cmq74mbe1jq4d" path="res://sfx/sword.7.ogg" id="3_a6shc"]
+[ext_resource type="Script" path="res://queue_free_timer.gd" id="4_4pefw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m228u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wy3mb"]
-albedo_color = Color(0.0980392, 0, 1, 1)
+albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_vd1e1"]
 lightmap_size_hint = Vector2i(14, 21)
@@ -17,40 +16,7 @@ material = SubResource("StandardMaterial3D_wy3mb")
 
 [sub_resource type="PrismMesh" id="PrismMesh_pl50c"]
 
-<<<<<<< HEAD
-[node name="Area3D" type="Area3D" groups=["Blue"]]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
-=======
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70g7t"]
-albedo_color = Color(0.12487, 0.0546814, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ie8m0"]
-material = SubResource("StandardMaterial3D_70g7t")
-size = Vector3(0.2, 0.2, 0.2)
-
-[node name="Area3D2" type="Area3D" groups=["Blue"]]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
->>>>>>> f66723f1e93a2b7c0e2addff62bddfc06d897cf8
-script = ExtResource("1_iyufa")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_m228u")
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_vd1e1")
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0.075)
-mesh = SubResource("PrismMesh_pl50c")
-
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
-emitting = false
-amount = 20
-one_shot = true
-explosiveness = 1.0
-mesh = SubResource("BoxMesh_ie8m0")
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cbenb"]
 emission_shape = 3
 emission_box_extents = Vector3(0.5, 0.5, 0.5)
 direction = Vector3(0, 1, 0)
@@ -59,5 +25,54 @@ initial_velocity_max = 4.0
 damping_max = 9.091
 color = Color(0.157671, 0.236911, 1, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2v72"]
+albedo_color = Color(0, 0.482353, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ie8m0"]
+material = SubResource("StandardMaterial3D_g2v72")
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Area3D2" type="Area3D" groups=["Blue"]]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
+script = ExtResource("1_iyufa")
+
+[node name="kitfo" parent="." instance=ExtResource("2_pxjku")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_m228u")
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_vd1e1")
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0.075)
+mesh = SubResource("PrismMesh_pl50c")
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.426107, 0.105229, -0.128284)
+emitting = false
+amount = 10
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 0
+visibility_aabb = AABB(0.0156016, -0.737997, 0.127906, 0.002, 1.34025, 0.002)
+process_material = SubResource("ParticleProcessMaterial_cbenb")
+draw_pass_1 = SubResource("BoxMesh_ie8m0")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_a6shc")
+volume_db = 46.568
+
+[node name="queue_free_timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+script = ExtResource("4_4pefw")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="queue_free_timer" to="queue_free_timer" method="_on_timeout"]

@@ -38,7 +38,7 @@ func _ready():
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f6at4"]
-albedo_color = Color(0.215686, 0, 1, 1)
+albedo_color = Color(0, 0.435294, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ihe0a"]
 material = SubResource("StandardMaterial3D_f6at4")
@@ -196,6 +196,8 @@ distance = 5.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_yylm4")
+volume_db = -25.297
+autoplay = true
 script = ExtResource("4_jse6n")
 
 [node name="Scroller" type="Node3D" parent="."]
@@ -215,10 +217,11 @@ transform = Transform3D(2.45642, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -49)
 mesh = SubResource("PlaneMesh_2twi3")
 
 [node name="InstancePoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.335601, 1.23314, -99.5865)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.181572, 1.2322, -98.4049)
 script = ExtResource("3_hq4gl")
 
 [node name="Timer" type="Timer" parent="InstancePoint"]
+wait_time = 0.7
 autostart = true
 
 [node name="Viewport2Din3D" parent="." instance=ExtResource("8_m73sb")]
@@ -236,10 +239,9 @@ script = SubResource("GDScript_3p68l")
 script = SubResource("GDScript_hitxt")
 
 [node name="ScoreLabel" type="Label3D" parent="InGameUI"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -3)
-text = "Score:
-0
-"
+transform = Transform3D(1, 0, 0, 0, -0.0351786, 0.999381, 0, -0.999381, -0.0351786, 0, 0.0907738, -3.66895)
+pixel_size = 0.0075
+text = "Score: 0"
 font_size = 48
 outline_size = 4
 script = ExtResource("6_26430")
@@ -255,5 +257,8 @@ transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 2.08165e-1
 visible = false
 text = "SONG NAME"
 outline_size = 4
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84.8792, -290.244, -80.83)
 
 [connection signal="timeout" from="InstancePoint/Timer" to="InstancePoint" method="_on_timer_timeout"]
